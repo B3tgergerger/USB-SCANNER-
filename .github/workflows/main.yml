@@ -36,10 +36,16 @@ jobs:
       run: |
         pip install pyinstaller
         pyinstaller --onefile usb_virus_scanner.py
+        echo "Build completed"
 
     - name: List dist directory
       run: |
         ls -l dist/
+        echo "Listing dist directory completed"
+
+    - name: Check if executable exists
+      run: |
+        if [ -f dist/usb_virus_scanner.exe ]; then echo "Executable exists"; else echo "Executable does not exist"; fi
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
