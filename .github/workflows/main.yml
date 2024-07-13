@@ -16,20 +16,29 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.x
+        python-version: '3.x'
+
+    - name: Show environment info
+      run: |
+        python --version
+        pip --version
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Show installed packages
+      run: |
+        pip list
+
     - name: Build executable
       run: |
+        pip install pyinstaller
         pyinstaller --onefile usb_virus_scanner.py
-        mv dist/usb_virus_scanner.exe .
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: USB_Virus_Scanner
-        path: usb_virus_scanner.exe
+        path: dist/usb_virus_scanner.exe
