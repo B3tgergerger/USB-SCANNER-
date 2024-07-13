@@ -32,9 +32,12 @@ jobs:
       run: |
         pip list
 
-    - name: Build executable
+    - name: Install pyinstaller
       run: |
         pip install pyinstaller
+
+    - name: Build executable
+      run: |
         pyinstaller --onefile usb_virus_scanner.py
         echo "Build completed"
 
